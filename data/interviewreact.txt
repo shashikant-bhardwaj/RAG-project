@@ -1,0 +1,838 @@
+
+1. What is Virtual DOM?
+-Virtual DOM is a lightweight JavaScript representation of the Real DOM maintained by React.
+-React compares old and new Virtual DOM trees using Reconciliation.
+-Only changed elements are updated in the Real DOM.
+-This reduces DOM operations and improves performance.
+
+
+2. Explain Reconciliation in React.
+Diffing = The algorithm React uses to compare old and new Virtual DOM trees and identify changes
+Reconciliation = Finding differences + updating only the changed parts of the Real DOM.
+
+
+3. Difference between Props and State.
+Props:
+-Passed from Parent to Child components.
+-Immutable (cannot be modified by the receiving component).
+-Used to pass data and callbacks between components.
+
+State:
+-Managed within the component.
+-Updated using setState() or useState().
+-State changes trigger component re-rendering.
+
+
+
+4. Why should state not be mutated directly?
+-React relies on immutability and reference comparison to detect state changes efficiently.
+-Direct state mutation may prevent React from recognizing updates and trigger incorrect UI rendering.
+-Updating state using setState() or useState() ensures proper re-rendering of components.
+-Immutable updates make state changes predictable and easier to debug.
+
+
+
+5. Difference between useEffect and useLayoutEffect
+useEffect:
+-Runs after the component renders and the browser paints the UI.
+-Non-blocking.
+-Used for API calls, subscriptions, timers, and other side effects.
+
+useLayoutEffect:
+-Runs after the DOM updates but before the browser paints.
+-Blocks browser painting until it completes.
+-Used for DOM measurements and layout calculations.
+
+
+
+6. Difference between Controlled and Uncontrolled Components
+Controlled Components:
+-Form data is managed by React state.
+-Input value is controlled using value and onChange.
+
+Uncontrolled Components:
+-Form data is managed by the DOM.
+-Access values using refs.
+
+
+
+7. What is React.memo?
+-React.memo is a Higher-Order Component (HOC) used to memoize functional components.
+-It prevents unnecessary re-renders when props have not changed.
+-React.memo performs a shallow comparison of props.
+-It helps improve performance by avoiding redundant rendering.
+
+
+
+8. Difference between useMemo and useCallback
+useMemo:
+-Memoizes a computed value.
+-Recalculates only when dependencies change.
+-Used for expensive calculations.
+
+useCallback:
+-Memoizes a function.
+-Returns the same function reference unless dependencies change.
+-Used to prevent unnecessary re-renders of child components.
+
+
+
+9. What are Higher Order Components (HOC)?
+-A Higher Order Component (HOC) is a function that takes a component and returns an enhanced component.
+-HOCs are used to reuse component logic across multiple components.
+-They do not modify the original component; they wrap it.
+-Common use cases include authentication, logging, permissions, and data fetching.
+
+
+10. What is Context API?
+-Context API is React's built-in state management solution for sharing data across components.
+-It allows data to be accessed without passing props through multiple levels (prop drilling).
+-It is commonly used for themes, authentication, user information, and application settings.
+-Best suited for small to medium-sized global state management.
+
+
+
+11. What is Prop Drilling?
+-Prop drilling is the process of passing props through multiple intermediate components to reach a deeply nested child component.
+-Intermediate components may pass the props without actually using them.
+-It makes the code harder to maintain and increases component coupling.
+-Context API or Redux can be used to avoid prop drilling.
+
+
+
+12. Difference between Context API and Redux
+Context API:
+-Built-in React solution for sharing global data.
+-Suitable for small to medium applications.
+-Can cause unnecessary re-renders with frequent updates.
+
+Redux:
+-Dedicated state management library.
+-Better for large and complex applications.
+-Provides centralized state, middleware, and debugging tools.
+
+
+13. Why are Keys important in React?
+-Keys help React identify changed, added, or removed list items efficiently.
+-They enable React's reconciliation process to update only affected elements.
+-Proper keys improve rendering performance and prevent UI inconsistencies.
+
+
+14. Why should array index not be used as key?
+-Indexes can change during sorting, filtering, or deletion.
+-React may incorrectly reuse DOM elements.
+-This can lead to incorrect UI updates and state issues.
+-Use stable unique IDs whenever possible.
+
+
+15. What are Hooks?
+-Hooks allow functional components to use state and lifecycle features.
+-They enable code reuse without using class components.
+-Examples: useState, useEffect, useContext, useRef.
+
+
+16. Difference between useRef and useState
+useState:
+-Stores state values.
+-Triggers component re-render on update.
+
+useRef:
+-Stores mutable values across renders.
+-Updating ref.current does not trigger re-render.
+-Commonly used for DOM access.
+
+
+17. What are Synthetic Events?
+-Synthetic Events are React's cross-browser wrapper around native browser events.
+-They provide a consistent event API across different browsers.
+
+
+18. Why is setState asynchronous?
+-React batches multiple state updates for performance optimization.
+-This reduces unnecessary re-renders and improves efficiency.
+
+
+19. What are Pure Components?
+-PureComponent performs shallow comparison of props and state.
+-It skips re-rendering when there are no changes in the state.
+-Used as a performance optimization technique.
+
+
+20. What is Lazy Loading?
+-Lazy loading loads components only when they are needed.
+-It reduces the initial bundle size and improves page load performance.
+
+
+21. What is Suspense?
+-Suspense displays a fallback UI while lazy-loaded components are loading.
+-Commonly used with React.lazy().
+
+
+22. What are Error Boundaries?
+-Error Boundaries catch JavaScript errors in child component trees.
+-They prevent the entire application from crashing.
+-They render a fallback UI instead.
+
+
+23. What are Custom Hooks?
+-Custom Hooks are reusable functions that encapsulate stateful logic.
+-They allow logic sharing without duplicating code.
+
+
+24. What causes unnecessary re-renders?
+-Parent component re-renders.
+-New object or function references.
+-Context updates.
+-Missing memoization.
+-Unnecessary state updates.
+
+
+25. How do you optimize React performance?
+-React.memo
+-useMemo
+-useCallback
+-Lazy Loading
+-Code Splitting
+-Pagination
+-Virtualization
+-Avoid unnecessary state updates
+
+
+26. A child component is re-rendering unnecessarily even though props are not changing. How would you optimize it?
+-Use React.memo().
+-Use useCallback() for functions.
+-Use useMemo() for derived values.
+-Ensure stable object/function references.
+
+
+27. A React application becomes slow while rendering a huge table with thousands of records. How would you improve performance?
+-Use pagination or virtualization.
+-Memoize rows/components.
+-Avoid rendering unnecessary rows.
+-Use server-side pagination for large datasets.
+
+
+28. You are passing data through multiple nested components. How would you avoid prop drilling?
+-Use Context API.
+-Use Redux Toolkit for large applications.
+
+
+29. A component is making repeated API calls on every render. What could be the issue?
+-Missing dependency array in useEffect().
+-Infinite state update loop.
+-Dependency values changing on every render (objects/functions).
+
+
+30. A list behaves incorrectly when items are deleted or reordered. What could be wrong?
+-Array index is used as key.
+-React cannot correctly track item identity when indexes change.
+-Use stable unique IDs instead.
+
+
+31. How would you prevent unnecessary API calls while typing in a search input?
+-Use debouncing to delay API calls until the user stops typing.
+-Optionally cache previous results to avoid duplicate requests.
+
+
+32. How would you implement authentication token handling for all API requests?
+-Use Axios interceptors.
+-Attach JWT tokens to request headers.
+-Handle token expiration and refresh logic centrally.
+
+
+33. A parent component re-renders and causes all child components to re-render. How would you optimize this?
+-Use React.memo().
+-Use useCallback() for functions.
+-Use useMemo() for computed values.
+-Avoid unnecessary state updates and prop changes.
+
+
+34. How would you handle cleanup of timers or event listeners in React?
+-Use the cleanup function inside useEffect().
+-Remove event listeners and clear timers on unmount.
+
+
+35. A component crashes and breaks the entire application UI. How would you handle this?
+-Use Error Boundaries.
+-Display a fallback UI instead of crashing the entire application.
+
+
+36. How would you implement pagination for large datasets?
+-Use client-side or server-side pagination.
+-Render only the required records per page.
+-Prefer server-side pagination for very large datasets.
+
+
+37. How would you persist application state after page refresh?
+-Use localStorage or sessionStorage.
+-Use Redux Persist for Redux-managed state.
+
+
+38. How would you dynamically load components only when required?
+-Use React.lazy() and Suspense.
+-Implement code splitting to reduce bundle size.
+
+
+39. How would you secure private routes in React applications?
+-Use Protected Routes.
+-Validate authentication before rendering routes.
+-Redirect unauthenticated users to the login page.
+
+
+40. A component updates state but UI is not re-rendering. What could be the possible reasons?
+-Direct state mutation.
+-Memoization preventing updates.
+-Incorrect dependency handling.
+-State value reference has not changed.
+
+
+41. How would you manage global state in a large enterprise application?
+-Use Redux Toolkit.
+-Organize state into slices/modules.
+-Use middleware for async operations.
+
+
+42. How would you optimize a search/filter feature working on large datasets?
+-Debouncing.
+-Memoization.
+-Pagination.
+-Virtualization.
+-Server-side filtering when appropriate.
+
+
+43. How would you cancel API requests when a component unmounts?
+-Use AbortController.
+-Use Axios cancellation mechanisms.
+-Clean up requests inside useEffect.
+
+
+44. How would you communicate between sibling components?
+-Lift state to a common parent.
+-Use Context API or Redux for shared state.
+
+
+45. How would you implement dark/light theme switching across the application?
+-Use Context API for theme state.
+-Apply conditional CSS classes or CSS variables.
+-Persist user preference in localStorage.
+
+
+46. A React app shows memory leak warnings. What are the possible causes?
+-Uncleaned timers.
+-Unremoved event listeners.
+-Pending API requests.
+-Unreleased subscriptions or WebSocket connections.
+
+
+47. How would you structure a large-scale React project?
+-Separate:
+  • Components
+  • Pages
+  • Services
+  • Hooks
+  • Redux
+  • Utilities
+  • Routes
+-Follow feature-based or modular folder structure.
+
+
+48. How would you improve SEO in React applications?
+-Use SSR frameworks like Next.js.
+-Add proper meta tags.
+-Generate SEO-friendly URLs and metadata.
+
+
+49. How would you improve first page load performance in React?
+-Code splitting.
+-Lazy loading.
+-Asset optimization.
+-CDN usage.
+-Reduce bundle size and unnecessary dependencies.
+
+
+50. How would you monitor/debug React performance issues?
+-React DevTools Profiler.
+-Browser Performance tab.
+-Lighthouse.
+-Analyze unnecessary re-renders and bundle size.
+
+
+
+
+
+
+
+
+
+
+
+
+
+React MCQs
+===========
+
+1. Why does this log old state?
+
+const [count, setCount] = useState(0);
+const handleClick = () => {
+  setCount(count + 1);
+  console.log(count);
+};
+
+Answer:
+-Logs old value (0).
+-State updates are asynchronous.
+-React updates state on the next render.
+
+
+
+2. What is the output?
+const [count, setCount] = useState(0);
+const handleClick = () => {
+  setCount(count + 1);
+  setCount(count + 1);
+  setCount(count + 1);
+};
+
+
+Answer:
+-Result = 1
+-Both updates use the same stale value=0.
+
+Correct:
+setCount(prev => prev + 1);
+setCount(prev => prev + 1);
+setCount(prev => prev + 1);
+Result = 3
+
+
+
+3. Infinite Loop
+
+useEffect(() => {
+  setCount(count + 1);
+}, [count]);
+
+Answer:
+-Infinite render loop.
+-Updating count triggers effect again.
+
+
+
+4. Why does this useEffect run every render?
+
+const obj = { name: "John" };
+useEffect(() => {
+  console.log("Run");
+}, [obj]);
+
+Answer:
+-New object reference created on every render.
+-React compares references, not values.
+
+
+
+5. React.memo Not Working
+
+const Child = React.memo(({ user }) => {
+  return <h1>{user.name}</h1>;
+});
+<Child user={{ name: "John" }} />
+
+Answer:
+-New object reference on every render.
+-React.memo performs shallow comparison.
+
+
+
+6. JavaScript Trap
+console.log([] == false);
+console.log([] === false);
+
+Answer:
+true
+false
+
+
+
+
+7. Why is this component re-rendering?
+
+const handleClick = () => {};
+<Child onClick={handleClick} />
+
+Answer:
+-New function reference on every render.
+-Use useCallback when needed.
+
+
+
+8. What is wrong with this key?
+users.map((user, index) =>
+  <User key={index} />
+)
+
+Answer:
+-Index keys break during:
+  -Sorting
+  -Filtering
+  -Deletion
+  -Reordering
+Use unique IDs.
+
+
+
+9. Why doesn't UI update?
+const [user, setUser] = useState({
+  name: "John"
+});
+user.name = "David";
+setUser(user);
+
+
+Answer:
+-State mutation.
+-Reference remains unchanged.
+-React may skip re-render.
+
+
+
+10. What is the output?
+function App() {
+  console.log("Parent");
+  return <Child />;
+}
+function Child() {
+  console.log("Child");
+  return <h1>Hello</h1>;
+}
+
+Answer:
+Parent
+Child
+Parent re-render ⇒ Child also re-renders.
+
+
+
+11. Stale Closure Problem
+const [count, setCount] = useState(0);
+useEffect(() => {
+  const id = setInterval(() => {
+    console.log(count);
+  }, 1000);
+
+  return () => clearInterval(id);
+}, []);
+
+
+Answer:
+-Always logs initial value.
+-Stale closure issue.
+
+
+
+12. Controlled Component
+const [value, setValue] = useState("");
+<input
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+/>
+
+Answer:
+-Controlled Component.
+-React state is source of truth.
+
+
+
+13. Reference Mutation
+const arr = [1, 2, 3];
+const newArr = arr;
+newArr.push(4);
+console.log(arr);
+
+Answer: [1,2,3,4]
+
+
+
+
+14. Why useCallback?
+const handleSave = useCallback(() => {
+  saveUser();
+}, []);
+
+Answer:
+-Preserves function reference.
+-Useful for memoized child components.
+
+
+
+15. Large Table Performance
+Scenario:
+-Rendering 10,000 rows is slow.
+
+Answer:
+-Debounce search.
+-Virtualization.
+-Memoization.
+-Server-side filtering.
+
+
+
+16. What is the output?
+const [count, setCount] = useState(0);
+useEffect(() => {
+  console.log(count);
+}, []);
+
+setCount(5);
+
+Answer:
+-Logs 0.
+-Effect uses values from render in which it was created.
+
+
+
+17. Why Does This Run Twice?
+useEffect(() => {
+  console.log("API Call");
+}, []);
+
+Answer:
+-React 18 StrictMode runs effects twice in development.
+-Production runs once.
+
+
+
+18. What is Wrong?
+const [user, setUser] = useState({
+  name: "John"
+});
+
+setUser({
+  name: "John"
+});
+
+
+Answer:
+-Causes re-render.
+-New object reference.
+
+
+
+19. Why Does useEffect Keep Running?
+const fetchUsers = () => {};
+useEffect(() => {
+  fetchUsers();
+}, [fetchUsers]);
+
+Answer:
+-Function recreated on every render.
+-Use useCallback.
+
+
+
+20. What is the Output?
+setCount(c => c + 1);
+setCount(c => c + 1);
+setCount(c => c + 1);
+
+Answer:
+-Result = 3
+-Functional updates use latest state.
+
+
+
+21. Why Doesn't React.memo Help?
+
+const Child = React.memo(({ items }) => {
+  return <div />;
+});
+<Child items={[1,2,3]} />
+
+Answer:
+-Array recreated every render.
+-Reference changes.
+
+
+
+22. What is the Output?
+useEffect(() => {
+  console.log("Effect");
+});
+console.log("Render");
+
+
+Answer:
+Render
+Effect
+
+
+
+
+23. Dependency Array Trap
+const user = {
+  id: 1
+};
+useEffect(() => {
+  loadUser();
+}, [user]);
+
+Answer:
+-Effect runs every render.
+-Object reference changes.
+
+
+
+24. Why Doesn't Child Update?
+const [items, setItems] = useState([]);
+items.push("A");
+setItems(items);
+
+Answer:
+-State mutation.
+-Reference unchanged.
+
+
+25. Parent vs Child Rendering
+function Parent() {
+  console.log("Parent");
+  return <Child />;
+}
+
+function Child() {
+  console.log("Child");
+  return null;
+}
+
+
+Answer:
+Parent
+Child
+
+
+Every Parent render triggers Child render.
+
+
+26. Which is Better?
+const total = useMemo(
+  () => calculateTotal(items),
+  [items]
+);
+
+vs
+const total = calculateTotal(items);
+
+
+Answer:
+-useMemo only for expensive calculations.
+-Overusing useMemo can hurt performance.
+
+
+
+27. What is Wrong?
+const [name, setName] = useState("");
+<input
+  defaultValue={name}
+  onChange={(e) => setName(e.target.value)}
+/>
+
+Answer:
+-Mixed controlled/uncontrolled behavior.
+-Should use value.
+
+
+
+28. Context API Trap
+<UserContext.Provider value={{ user }}>
+
+Answer:
+-New object every render.
+-All consumers re-render.
+-Memoize provider value.
+
+
+
+29. Memory Leak
+useEffect(() => {
+  window.addEventListener("resize", handler);
+}, []);
+
+Answer:
+-Missing cleanup.
+-Remove listener on unmount.
+
+
+
+30. Why is API Called Multiple Times?
+useEffect(() => {
+  fetchData();
+  setLoading(false);
+}, [loading]);
+
+Answer:
+-Updating loading triggers effect again.
+-Potential loop.
+
+
+
+31. What is the Output?
+const [user, setUser] = useState({
+  name: "John"
+});
+console.log(user === {
+  name: "John"
+});
+
+
+Answer:
+-false
+-Objects are compared by reference.
+
+
+
+32. Context/Redux Performance Scenario
+Problem:
+-Updating theme re-renders entire app.
+
+Answer:
+-Split contexts.
+-Memoize provider values.
+-Avoid frequently changing global state.
+
+
+
+33. Rendering 50,000 Records
+Answer:
+-Virtualization.
+-Pagination.
+-Memoization.
+-Server-side filtering.
+
+
+
+34. Hidden Stale Closure
+useEffect(() => {
+  fetchUsers();
+}, []);
+
+
+Answer:
+-Looks fine.
+-Problem if fetchUsers depends on props/state.
+-Possible stale closure.
+
+
+
+35. Dashboard Performance Design
+Scenario:
+-20 widgets
+-Live updates every second
+
+Answer:
+-React.memo
+-Virtualization
+-Debouncing
+-WebSockets
+-Context optimization
+-Lazy loading
+
