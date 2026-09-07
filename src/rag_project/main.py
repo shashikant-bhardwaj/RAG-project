@@ -7,6 +7,7 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_core.prompts import  ChatPromptTemplate
 load_dotenv()
 
+#  -------------------------loading document ------------------------------------
 
 # data = TextLoader("data/interviewreact.txt")
 data = PyPDFLoader("data/interviewreact.pdf")

@@ -14,9 +14,11 @@ dependencies = [
     "langchain-community>=0.4.2",
     "langchain-huggingface>=1.2.2",
     "langchain-mistralai>=1.1.6",
+    "langchain-text-splitters>=1.1.2",
     "mistralai>=2.9.4",
     "pypdf>=6.17.0",
     "python-dotenv>=1.2.3",
+    "tiktoken>=0.14.0",
 ]
 
 [project.scripts]
