@@ -19,5 +19,7 @@ data = PyPDFLoader("data/interviewreact.pdf")
 docs = data.load()
 
 chunks = splitter.split_documents(docs)
-
-print(chunks[0].page_content)
+for i in chunks:
+    print(i.page_content)
+    print()
+    print()
