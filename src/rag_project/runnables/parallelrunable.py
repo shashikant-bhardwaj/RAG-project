@@ -33,7 +33,8 @@ topic = "Machine Learning"
 
 #runnable
 chain = RunnableParallel({
-    "short":RunnableLambda(lambda X : X["short"]) | model | parser
+    "short":RunnableLambda(lambda X : X["short"]) | short_prompt | model | parser,
+    "detailed":RunnableLambda(lambda x : x["detailed"]) | detailed_prompt | model | parser
 })
 
 result = chain.invoke({
