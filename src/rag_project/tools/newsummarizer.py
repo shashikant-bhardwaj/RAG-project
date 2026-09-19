@@ -10,29 +10,34 @@ search_tool = TavilySearchResults(
     max_result = 3
 )
 
-prompt = ChatPromptTemplate.from_template(
-    """
-you are a helpful assistant 
+# prompt = ChatPromptTemplate.from_template(
+#     """
+# you are a helpful assistant 
 
-summarizes the following news into the  clear bullet points
-{news}
-    """
-)
+# summarizes the following news into the  clear bullet points
+# {news}
+#     """
+# )
 
-model = ChatGroq(
-    model = "openai/gpt-oss-120b",
-    api_key = os.getenv("GROQ_API_KEY")
-)
+# model = ChatGroq(
+#     model = "openai/gpt-oss-120b",
+#     api_key = os.getenv("GROQ_API_KEY")
+# )
 
-parser = StrOutputParser()
+# parser = StrOutputParser()
 
-chain = prompt | model | parser
+# chain = prompt | model | parser
 
-news_result = search_tool.run("Latest AI news of hacking hugging face of 2026")
+# news_result = search_tool.run("Latest AI news of hacking hugging face of 2026")
 
-result = chain.invoke({"news": news_result})
+# result = chain.invoke({"news": news_result})
 
-print(result)
+# print(result)
+
+
+print(search_tool.description)
+print(search_tool.name)
+print(search_tool.args)
 
 
 
