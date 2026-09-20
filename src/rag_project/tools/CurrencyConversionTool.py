@@ -79,14 +79,12 @@ print(final_result.content)
    
 
 
-        #print(tool_message1)
-#print(Ai_message.tool_calls)
-#Message.append(Ai_message)
+       
 
 
 
 
-#print(Message)
 
-# convert.invoke(tool_suggestion.tool_calls)
+
+
 
