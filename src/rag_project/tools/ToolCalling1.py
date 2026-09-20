@@ -39,9 +39,4 @@ final_result = llm_with_tool.invoke(Messages)
 
 print(final_result.content)
 
-# print(result)
-# print()
-# print()
-# print()
-# print(result2)
-# print()
+
