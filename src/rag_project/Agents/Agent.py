@@ -72,8 +72,6 @@ def get_news(city: str) -> str:
     return f"Latest news in {city}:\n\n" + "\n\n".join(news)
 
 
-print(get_news.invoke({"city": "bhopal"}))
-
 
 # creating llm
 
