@@ -42,15 +42,24 @@ llm = ChatGroq(
 
 llm_with_tool = llm.bind_tools([get_conversion_factor, convert])
 
-query = HumanMessage("What is the conversion factor between USD and INR,  based on that can you convert 10 usd to inr")
+Message = []
 
-Message = [query]
+while True:
+     
+ text = str(input("You : "))
 
-Ai_message = llm_with_tool.invoke(Message)
+ query = HumanMessage(text)
 
-Message.append(Ai_message)
+ Message.append(query)
 
-for tool_call in Ai_message.tool_calls:
+ Ai_message = llm_with_tool.invoke(Message)
+
+ Message.append(Ai_message)
+ if not Ai_message.tool_calls:
+    print("Bot : ", Ai_message.content)
+    continue;
+
+ for tool_call in Ai_message.tool_calls:
     #Execute the 1st tool and get the value of conversion rate
  
     if tool_call["name"] == "get_conversion_factor":
@@ -63,10 +72,10 @@ for tool_call in Ai_message.tool_calls:
     
     
             
-Ai_message2 = llm_with_tool.invoke(Message)
-Message.append(Ai_message2)
+ Ai_message2 = llm_with_tool.invoke(Message)
+ Message.append(Ai_message2)
     
-for tool_call in Ai_message2.tool_calls:
+ for tool_call in Ai_message2.tool_calls:
     #Execute the second tool using the converion rate from tool1
     if tool_call["name"] == "convert":
         #fetch the current args
@@ -74,8 +83,8 @@ for tool_call in Ai_message2.tool_calls:
         tool_message2 = convert.invoke(tool_call)
         Message.append(tool_message2)  
 
-final_result = llm_with_tool.invoke(Message)   
-print(final_result.content)     
+ final_result = llm_with_tool.invoke(Message)   
+ print(final_result.content)     
    
 
 
