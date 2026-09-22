@@ -19,7 +19,12 @@ def get_conversion_factor(base_currency:str, target_currency:str)-> float:
     url = f"https://v6.exchangerate-api.com/v6/2b3b93f90391db878060a7b9/pair/{base_currency}/{target_currency}"
     response = requests.get(url)
 
-    return response.json()
+    data = response.json()
+    if response.status_code != 200:
+       return f"Error: {data.get('Message','could not convert currency')}"
+
+    return data;
+    
 
 
 result = get_conversion_factor.invoke({"base_currency":"USD", "target_currency":"INR"})
