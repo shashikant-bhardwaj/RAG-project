@@ -39,7 +39,7 @@ mmr_retriever = vectorstore.as_retriever(
 
 print("\n===== MMR Results =====\n")
 
-mmr_docs = mmr_retriever.invoke("What is gradient descent?")
+docs = mmr_retriever.invoke("What is gradient descent?")
 
 for doc in mmr_docs:
     print(doc.page_content)
