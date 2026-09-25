@@ -235,6 +235,6 @@ while True:
 
     #print("Bot : ", result['messages'][-1].content)
 
-    print(result)
+    print(result);
 
     
