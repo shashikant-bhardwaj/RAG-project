@@ -14,10 +14,10 @@ data = TextLoader("data/split.txt")
 
 docs = data.load()
 
-# chunks = splitter.split_documents(docs)
+chunks = splitter.split_documents(docs)
 
-# for i in chunks:
-#     print(i.page_content)
-#     print()
-#     print()
-# print(chunks[0].page_content)
+for i in chunks:
+    print(i.page_content)
+    print()
+    print()
+print(chunks[0].page_content)

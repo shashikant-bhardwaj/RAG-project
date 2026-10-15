@@ -42,4 +42,4 @@ print("\n===== MMR Results =====\n")
 docs = mmr_retriever.invoke("What is gradient descent?")
 
 for doc in mmr_docs:
-    print(doc.page_content)
+    print(doc.page_content);
