@@ -37,7 +37,7 @@ query = "What is gradient descent?"
 docs = multi_query_retriever.invoke(query)
 
 
-print("\nRetrieved Documents:\n")
+print("\nRetrieved Documents:\n");
 
 for doc in docs:
     print(doc.page_content)
